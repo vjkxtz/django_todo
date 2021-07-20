@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{%if request.user.is_authenticated %}
+    <p> {{request.user}} </p>
+    <a href="{% url 'logout'%}">logout</a>
+{%else %}
+    <a href =""> login in </a>
+{%endif %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks</title>
+</head>
+<body>
+
+    <h1>Tasks</h1>
+        <a href=" {% url 'create' %}">Add new tasks</a>
+        <table>
+            <tr>
+                <th>Items</th>
+            </tr>
+            {% for task in object_list %}
+            <tr>
+                <td>
+                    {{task.title}}
+                    <a href="{% url 'detail' task.id %}">view</a>
+                    <a href="{% url 'edit' task.id%}">edit</a>
+                    <a href="{% url 'delete' task.id%}">Delete</a>
+
+                </td>
+            </tr>
+            {%empty%}
+            {% endfor %}
+
+        </table>
+        
+    
+</body>
+</html>
